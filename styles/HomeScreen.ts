@@ -3,7 +3,7 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#ccc',
+        backgroundColor: '#F0F0F0',
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -11,14 +11,12 @@ export default StyleSheet.create({
         flex: 2,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'purple'
     },
     menuContainer: {
         flex: 2,
         borderRadius: 10,
         overflow: 'hidden',
         margin: 20,
-        backgroundColor: 'green'
     },
     resetButtonContainer: {
         backgroundColor: 'white',
@@ -36,17 +34,32 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 30
     },
-    emailText: {
+    idText: {
         color: 'gray',
         fontSize: 20
     },
-    searchButton: {
-        backgroundColor: 'black',
+
+    searchContainer: {
         position: 'absolute',
         bottom: 0,
         right: 0,
+        flexDirection: "row"
+    },
+    searchButton: {
+        backgroundColor: 'black',
         padding: 10,
         borderRadius: 15
+    },
+    input:{
+        backgroundColor: 'black',
+        color: 'white',
+        padding: 5,
+        fontSize: 20,
+        borderRadius: 15,
+        width: 150
+    },
+    inputHidden:{
+        display: 'none'
     },
     resetButton: {
         borderColor: 'black',
@@ -59,5 +72,9 @@ export default StyleSheet.create({
     },
     resetButtonText: {
         fontSize: 17
+    },
+    menuItemSeparator: {
+        borderBottomWidth: 1,
+        borderColor: '#F0F0F0'
     }
 });

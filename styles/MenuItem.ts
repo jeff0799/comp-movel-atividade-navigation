@@ -21,13 +21,13 @@ export default StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: 'lightblue'
     },
     icon: {
-        backgroundColor: 'red',
         padding: 5,
         marginRight: 5,
-        borderRadius: 5
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: '#F0F0F0'
     },
     title: {
         fontSize: 17,
