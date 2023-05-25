@@ -1,4 +1,4 @@
-import { Pressable, Text, View } from "react-native";
+import { Pressable, StyleProp, Text, View, ViewStyle } from "react-native";
 import { AntDesign } from '@expo/vector-icons';
 import styles from "../styles/MenuItem";
 import Toast from "react-native-root-toast";
@@ -11,6 +11,7 @@ interface MenuItemProps {
     navigateTo: string;
     navigation: any;
     userId: string;
+    style?: StyleProp<ViewStyle>;
 }
 
 export function MenuItem(props: MenuItemProps) {
@@ -22,7 +23,7 @@ export function MenuItem(props: MenuItemProps) {
     }
 
     return (
-        <Pressable style={styles.container}
+        <Pressable style={[styles.container, props?.style]}
             onPress={openScreen}>
             <View style={styles.IconContainer}>
                 <Text style={styles.icon}>

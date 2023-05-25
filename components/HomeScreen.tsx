@@ -19,20 +19,43 @@ export default function HomeScreen({ route, navigation }) {
   const [user, setUser] = useState<User>()
 
   const defaultImage = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/0.png'
+  const menuItemsProps = [
+    {
+      icon: <Ionicons name="md-person-outline" size={24} color="black" />,
+      title: 'Bio',
+      subtitle: 'Um pouco sobre o usuário',
+      navigateTo: 'Bio'
+    },
+    {
+      icon: <MaterialCommunityIcons name="headset" size={24} color="black" />,
+      title: 'Orgs',
+      subtitle: 'Organizações que o usuário faz parte',
+      navigateTo: 'Orgs'
+    },
+    {
+      icon: <MaterialCommunityIcons name="file-document-outline" size={24} color="black" />,
+      title: 'Repositórios',
+      subtitle: 'Lista contendo todos os repositórios',
+      navigateTo: 'Repositories'
+    },
+    {
+      icon: <MaterialCommunityIcons name="face-recognition" size={24} color="black" />,
+      title: 'Seguidores',
+      subtitle: 'Lista de seguidores',
+      navigateTo: 'Followers'
+    }
+  ]
 
   useEffect(() => {
-    // let user = 'tadeuzagallo'
-    // let user = 'ronaldaraujo'
-    // let user = 'jeff0799'
-    if (route?.params?.userId) getUser(route.params.userId)
+    if (route?.params?.userId) getUserFromAPI(route.params.userId)
   }, [])
 
   function getInputedUser() {
     if (!inputText) return
-    getUser(inputText.toLocaleLowerCase())
+    getUserFromAPI(inputText)
   }
 
-  function getUser(userId: string) {
+  function getUserFromAPI(userId: string) {
     fetch(`https://api.github.com/users/${userId}`)
       .then((response) => {
         if (response.status === 404) {
@@ -65,7 +88,7 @@ export default function HomeScreen({ route, navigation }) {
       getInputedUser()
     }
   }
-  function onInputBlur() {
+  function HandleInputBlur() {
     setShowInput(false)
     getInputedUser()
   }
@@ -84,7 +107,7 @@ export default function HomeScreen({ route, navigation }) {
               style={[styles.input,
               !showInput ? styles.inputHidden : {}]}
               onChangeText={setInputText}
-              onBlur={onInputBlur}
+              onBlur={HandleInputBlur}
               value={inputText}
             />
             <Pressable style={styles.searchButton}
@@ -96,37 +119,18 @@ export default function HomeScreen({ route, navigation }) {
         <Text style={styles.nameText}>{user?.name}</Text>
         <Text style={styles.idText}>{user?.id ? '@' + user?.id : null}</Text>
       </View>
+
       <View style={styles.menuContainer}>
-        <MenuItem icon={<Ionicons name="md-person-outline" size={24} color="black" />}
-          title='Bio'
-          subtitle='Um pouco sobre o usuário'
-          navigateTo='Bio'
-          navigation={navigation}
-          userId={user?.id} />
-        <View style={styles.menuItemSeparator}></View>
-
-        <MenuItem icon={<MaterialCommunityIcons name="headset" size={24} color="black" />}
-          title='Orgs'
-          subtitle='Organizações que o usuário faz parte'
-          navigateTo='Orgs'
-          navigation={navigation}
-          userId={user?.id} />
-        <View style={styles.menuItemSeparator}></View>
-
-        <MenuItem icon={<MaterialCommunityIcons name="file-document-outline" size={24} color="black" />}
-          title='Repositórios'
-          subtitle='Lista contendo todos os repositórios'
-          navigateTo='Repositories'
-          navigation={navigation}
-          userId={user?.id} />
-        <View style={styles.menuItemSeparator}></View>
-
-        <MenuItem icon={<MaterialCommunityIcons name="face-recognition" size={24} color="black" />}
-          title='Seguidores'
-          subtitle='Lista de seguidores'
-          navigateTo='Followers'
-          navigation={navigation}
-          userId={user?.id} />
+        {menuItemsProps.map((menuItemProps, i) => (
+          <MenuItem key={menuItemProps.navigateTo}
+            style={{ borderTopWidth: 1, borderTopColor: '#F0F0F0' }}
+            icon={menuItemProps.icon}
+            title={menuItemProps.title}
+            subtitle={menuItemProps.subtitle}
+            navigateTo={menuItemProps.navigateTo}
+            navigation={navigation}
+            userId={user?.id} />
+        ))}
       </View>
 
       <View style={styles.resetButtonContainer}>

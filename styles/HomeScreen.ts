@@ -72,9 +72,5 @@ export default StyleSheet.create({
     },
     resetButtonText: {
         fontSize: 17
-    },
-    menuItemSeparator: {
-        borderBottomWidth: 1,
-        borderColor: '#F0F0F0'
     }
 });

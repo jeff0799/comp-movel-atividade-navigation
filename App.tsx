@@ -10,28 +10,42 @@ import { RootSiblingParent } from 'react-native-root-siblings'
 const Stack = createNativeStackNavigator();
 
 export default function App() {
+  const menuScreensProps = [
+    {
+      name: 'Bio',
+      component: BioScreen,
+      nameOnTitle: 'Bio'
+    },
+    {
+      name: 'Orgs',
+      component: OrgsScreen,
+      nameOnTitle: 'Organizações'
+    },
+    {
+      name: 'Repositories',
+      component: RepositoriesScreen,
+      nameOnTitle: 'Repositórios'
+    },
+    {
+      name: 'Followers',
+      component: FollowersScreen,
+      nameOnTitle: 'Seguidores'
+    },
+  ]
 
   return (
     <RootSiblingParent>
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen options={{ headerShown: false }} name='Home' component={HomeScreen} />
-          <Stack.Screen name='Bio' component={BioScreen}
-            //@ts-ignore
-            options={({ route }) => ({ title: `Bio de ${route.params?.userId}` })}
-          />
-          <Stack.Screen name='Orgs' component={OrgsScreen}
-            //@ts-ignore
-            options={({ route }) => ({ title: `Organizações de ${route.params?.userId}` })}
-          />
-          <Stack.Screen name='Repositories' component={RepositoriesScreen}
-            //@ts-ignore
-            options={({ route }) => ({ title: `Repositórios de ${route.params?.userId}` })}
-          />
-          <Stack.Screen name='Followers' component={FollowersScreen}
-            //@ts-ignore
-            options={({ route }) => ({ title: `Seguidores de ${route.params?.userId}` })}
-          />
+          {menuScreensProps.map((screen)=>(
+            <Stack.Screen key={screen.name}
+              name={screen.name} component={screen.component}
+              //@ts-ignore
+              options={({ route }) => ({ title: `${screen.nameOnTitle} de ${route.params?.userId}` })}
+            />
+          ))}
+          
         </Stack.Navigator>
       </NavigationContainer>
     </RootSiblingParent>

@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FlatList, Pressable, Text, View } from "react-native";
+import { FlatList, Pressable, Text } from "react-native";
 import styles from '../styles/ListItem'
 import Toast from "react-native-root-toast";
 import toastConfig from "../config/toastConfig";
@@ -50,6 +50,5 @@ export default function FollowersScreen({ route, navigation }) {
             renderItem={renderItem}
             keyExtractor={(item) => item}
         />
-
     )
 }
